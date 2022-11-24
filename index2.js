@@ -33,6 +33,11 @@ let socket = new WebSocket("ws://localhost:9001");
 
 // 
 
-socket.on("open", () => {
-    console.log("connected to ws");
-});
+
+const main = () => {
+    socket.on("open", () => {
+        console.log("connected to ws");
+    });
+}
+
+main()
