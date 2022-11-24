@@ -1,5 +1,4 @@
-const  {WebSocket, createWebSocketStream } = require("ws");
-const { JSONRPCClient } = require("json-rpc-2.0");
+const  {WebSocket} = require("ws");
 let socket = new WebSocket("ws://localhost:9001");
 
 const main = async () => {
