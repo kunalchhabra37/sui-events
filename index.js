@@ -1,6 +1,6 @@
 const  {WebSocket, createWebSocketStream } = require("ws");
 
-let socket = new WebSocket("wss://localhost:9001");
+let socket = new WebSocket("ws://localhost:9001");
 
 socket.onopen = function(e) {
   console.log("[open] Connection established");
