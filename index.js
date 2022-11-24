@@ -1,21 +1,27 @@
 const  {WebSocket, createWebSocketStream } = require("ws");
 
-// const ws = new WebSocket("ws://localhost:9001");
+let socket = new WebSocket("wss://localhost:9001");
 
-// const duplex = createWebSocketStream(ws, { encoding: "utf8" });
-
-// duplex.pipe(process.stdout);
-// process.stdin.pipe(duplex);
-
-// ws.on("message", function message(data) {
-//   console.log(`received: ${data}`);
-// });
-
-const createStream = async () => {
-  const ws = new WebSocket("ws://localhost:9001");
-  ws.on("message", function message(data) {
-    console.log(`received: ${data}`);
-  });
+socket.onopen = function(e) {
+  console.log("[open] Connection established");
+  console.log("Sending to server");
+  socket.send("My name is John");
 };
 
-createStream()
+socket.onmessage = function(event) {
+  console.log(`[message] Data received from server: ${event.data}`);
+};
+
+socket.onclose = function(event) {
+  if (event.wasClean) {
+    console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+  } else {
+    // e.g. server process killed or network down
+    // event.code is usually 1006 in this case
+    console.log('[close] Connection died');
+  }
+};
+
+socket.onerror = function(error) {
+  console.log(`[error]`);
+};
